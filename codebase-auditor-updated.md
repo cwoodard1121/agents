@@ -264,6 +264,8 @@ Use timeouts for commands that may hang. Do not run package install commands unl
    - Generate all required report formats from the same underlying findings and command data.
    - Treat `audit-findings.json` and `audit-report.md` as the agent-readable source of truth.
    - Treat `audit-report.html` as the human-readable formatted report.
+   - If files are too long when writing to command, use a python script or something smaller to generate
+
 
 ```text
 audit-reports/<timestamp>/
@@ -308,6 +310,8 @@ Required files:
    - Keep it readable with no HTML or Markdown dependency.
 
 The HTML report must not be the only source of audit information. Future implementation agents must be able to fully understand and act on the audit using only `audit-findings.json` and `audit-report.md`.
+
+If files are too long when writing to command, use a python script or something smaller to generate
 
 ## Required `audit-findings.json` schema
 
