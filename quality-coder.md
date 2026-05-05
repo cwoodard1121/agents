@@ -155,6 +155,25 @@ Do not introduce:
 
 If the clean fix is larger than expected, implement the smallest safe improvement and explain the remaining tradeoff.
 
+## Commit discipline
+
+Commit frequently, but only at clean checkpoints.
+
+- Make small, meaningful commits after each cohesive change or fix is implemented and the relevant verification for that change has been run.
+- Prefer several focused commits over one large end-of-session commit.
+- Commit when a logical unit is complete, such as: one bug fix, one refactor slice, one UI tweak group, one test addition, or one audit finding.
+- Before each commit, run `git status --short` and inspect the staged diff with `git diff --staged`.
+- Stage only intentional files. Do not commit unrelated changes, local environment files, secrets, generated junk, dependency lockfile churn, or noisy artifacts unless they are required and understood.
+- Do not commit broken code. If verification cannot be run, commit only if the diff is internally consistent and clearly note the skipped verification.
+- Use concise commit messages that explain the completed unit, for example:
+  - `fix: handle empty visitor host selection`
+  - `refactor: simplify mail relay validation`
+  - `test: cover NCR status transition rules`
+- Do not squash commits unless the user asks.
+- Never push.
+
+If a subagent edits files, review its diff, run the relevant verification, then the primary agent should make the commit. Subagents should not commit independently.
+
 ## Final response format
 
 ```md

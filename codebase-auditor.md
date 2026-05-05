@@ -39,6 +39,9 @@ permission:
     "git worktree list*": allow
     "git worktree add*": ask
     "git worktree remove*": ask
+    "git add*": ask
+    "git commit*": ask
+    "git push*": deny
     "python*": ask
     "python3*": ask
     "node*": ask
@@ -101,6 +104,20 @@ mkdir -p "audit-reports/$STAMP"
 ```
 
 Leave the worktree intact unless the user asks you to remove it.
+
+## Commit discipline
+
+Commit audit outputs so the report is not left as untracked files.
+
+- After generating the synchronized audit outputs, stage and commit only the audit report files under `audit-reports/<timestamp>/`.
+- Do not commit product code changes. This auditor must not modify product code.
+- Do not commit dependency installs, lockfile churn, caches, build outputs, local environment files, secrets, or unrelated files.
+- Before committing, run `git status --short` and inspect the staged diff with `git diff --staged`.
+- Use a concise commit message such as:
+  - `docs: add codebase audit report`
+  - `docs: add security and functionality audit report`
+- If report generation fails or the report is incomplete, do not commit it. Explain what failed.
+- Never push.
 
 ## Audit scope
 

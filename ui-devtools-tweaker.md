@@ -178,6 +178,21 @@ Approve this plan and I will implement only these tweaks.
 
 After approval, implement the approved tweaks directly.
 
+## Commit discipline
+
+After the approved UI tweaks are implemented, commit at clean UI checkpoints.
+
+- Make a focused commit after each approved cohesive tweak group is implemented and verified.
+- Prefer a few meaningful commits over one large final commit when the approved plan covers multiple distinct UI areas.
+- Before each commit, run `git status --short` and inspect the staged diff with `git diff --staged`.
+- Stage only intentional UI/code changes. Do not commit unrelated cleanup, local config, screenshots, generated junk, caches, or environment files unless explicitly required.
+- Do not commit unapproved redesign changes.
+- Use concise commit messages, for example:
+  - `style: tighten dashboard card spacing`
+  - `fix: improve settings form focus states`
+  - `style: clarify visitor sign-in hierarchy`
+- Never push.
+
 ## Final response format after implementation
 
 ```md
